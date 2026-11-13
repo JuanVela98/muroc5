@@ -38,10 +38,10 @@ function AuthForm() {
     <main className="flex flex-1 items-center justify-center p-6">
       <form
         onSubmit={submit}
-        className="w-full max-w-sm space-y-4 rounded-2xl border border-white/10 bg-slate-900/60 p-8 shadow-lg shadow-black/30 backdrop-blur-md"
+        className="w-full max-w-sm space-y-4 rounded-2xl border border-white/60 bg-white/70 p-8 shadow-lg shadow-sky-900/10 backdrop-blur-md"
       >
-        <h1 className="text-2xl font-bold text-white">💡 Muro de Ideas</h1>
-        <p className="text-sm text-slate-300">
+        <h1 className="text-2xl font-bold text-slate-900">💡 Muro de Ideas</h1>
+        <p className="text-sm text-slate-600">
           {mode === "login" ? "Entra con tu cuenta" : "Crea tu cuenta"}
         </p>
         <input
@@ -50,7 +50,7 @@ function AuthForm() {
           placeholder="Correo"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full rounded-lg border border-white/20 bg-white/10 p-3 text-white placeholder:text-slate-400 focus:border-sky-400 focus:outline-none"
+          className="w-full rounded-lg border border-sky-300 bg-white/70 p-3 text-slate-900 placeholder:text-slate-500 focus:border-sky-500 focus:outline-none"
         />
         <input
           type="password"
@@ -59,7 +59,7 @@ function AuthForm() {
           placeholder="Contraseña (mín. 6)"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full rounded-lg border border-white/20 bg-white/10 p-3 text-white placeholder:text-slate-400 focus:border-sky-400 focus:outline-none"
+          className="w-full rounded-lg border border-sky-300 bg-white/70 p-3 text-slate-900 placeholder:text-slate-500 focus:border-sky-500 focus:outline-none"
         />
         <button
           disabled={busy}
@@ -67,11 +67,11 @@ function AuthForm() {
         >
           {mode === "login" ? "Entrar" : "Crear cuenta"}
         </button>
-        {msg && <p className="text-sm text-red-300">{msg}</p>}
+        {msg && <p className="text-sm text-red-500">{msg}</p>}
         <button
           type="button"
           onClick={() => setMode(mode === "login" ? "signup" : "login")}
-          className="w-full text-sm text-sky-300 underline hover:text-sky-200"
+          className="w-full text-sm text-sky-700 underline hover:text-sky-600"
         >
           {mode === "login"
             ? "¿No tienes cuenta? Regístrate"
@@ -155,18 +155,18 @@ function Wall({ session }: { session: Session }) {
   return (
     <main className="mx-auto w-full max-w-2xl flex-1 p-4 sm:p-8">
       <header className="mb-6 flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-white">💡 Muro de Ideas</h1>
+        <h1 className="text-2xl font-bold text-slate-900">💡 Muro de Ideas</h1>
         <div className="flex items-center gap-3 text-sm">
           <span
             data-testid="online-count"
-            className="flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-500/15 px-3 py-1 font-medium text-emerald-200 backdrop-blur"
+            className="flex items-center gap-2 rounded-full border border-sky-300 bg-white/70 px-3 py-1 font-medium text-sky-900 backdrop-blur"
           >
-            <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-400" />
+            <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-500" />
             {online} {online === 1 ? "persona conectada" : "personas conectadas"}
           </span>
           <button
             onClick={() => supabase.auth.signOut()}
-            className="text-slate-300 underline hover:text-white"
+            className="text-slate-700 underline hover:text-slate-900"
           >
             Salir
           </button>
@@ -180,15 +180,15 @@ function Wall({ session }: { session: Session }) {
           maxLength={280}
           rows={3}
           placeholder="Escribe una idea corta…"
-          className="w-full rounded-xl border border-white/20 bg-white/10 p-3 text-white backdrop-blur placeholder:text-slate-400 focus:border-sky-400 focus:outline-none"
+          className="w-full rounded-xl border border-white/60 bg-white/70 p-3 text-slate-900 shadow-lg shadow-sky-900/10 backdrop-blur placeholder:text-slate-500 focus:border-sky-500 focus:outline-none"
         />
         <div className="flex items-center justify-between">
-          <span className="text-xs text-slate-300">{text.length}/280</span>
+          <span className="text-xs text-slate-600">{text.length}/280</span>
           <button className="rounded-lg bg-sky-500 px-5 py-2 font-semibold text-white hover:bg-sky-400">
             Publicar
           </button>
         </div>
-        {error && <p className="text-sm text-red-300">{error}</p>}
+        {error && <p className="text-sm text-red-600">{error}</p>}
       </form>
 
       <ul className="space-y-3">
@@ -197,22 +197,22 @@ function Wall({ session }: { session: Session }) {
           return (
             <li
               key={idea.id}
-              className="rounded-xl border border-white/10 bg-slate-900/60 p-4 shadow-lg shadow-black/30 backdrop-blur-md"
+              className="rounded-xl border border-white/60 bg-white/70 p-4 shadow-lg shadow-sky-900/10 backdrop-blur-md"
             >
-              <p className="whitespace-pre-wrap break-words text-slate-100">{idea.content}</p>
-              <div className="mt-3 flex items-center justify-between text-sm text-slate-400">
+              <p className="whitespace-pre-wrap break-words text-slate-900">{idea.content}</p>
+              <div className="mt-3 flex items-center justify-between text-sm text-slate-500">
                 <span>
                   {idea.author} · {new Date(idea.created_at).toLocaleString()}
                 </span>
                 <span className="flex items-center gap-3">
                   <button
                     onClick={() => toggleLike(idea)}
-                    className={liked ? "font-semibold text-pink-400" : "hover:text-pink-400"}
+                    className={liked ? "font-semibold text-pink-600" : "hover:text-pink-600"}
                   >
                     {liked ? "❤️" : "🤍"} {idea.likes.length}
                   </button>
                   {idea.user_id === user.id && (
-                    <button onClick={() => remove(idea.id)} className="hover:text-red-400">
+                    <button onClick={() => remove(idea.id)} className="hover:text-red-600">
                       Borrar
                     </button>
                   )}
@@ -222,7 +222,7 @@ function Wall({ session }: { session: Session }) {
           );
         })}
         {ideas.length === 0 && (
-          <li className="py-10 text-center text-slate-300">Aún no hay ideas. ¡Publica la primera!</li>
+          <li className="py-10 text-center text-slate-700">Aún no hay ideas. ¡Publica la primera!</li>
         )}
       </ul>
     </main>

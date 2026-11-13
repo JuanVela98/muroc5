@@ -655,7 +655,9 @@ void main() {
     const xSegCount = Math.ceil(width * 0.02);
     const ySegCount = Math.ceil(height * 0.05);
     this.mesh.geometry.setTopology(xSegCount, ySegCount);
-    this.mesh.geometry.setSize(width, height);
+    // Sobredimensionar el plano: con incline != 0 el mesh se inclina y puede
+    // descubrir la esquina inferior; el overscan garantiza cobertura total.
+    this.mesh.geometry.setSize(width * 1.3, height * 1.5);
     this.mesh.material.uniforms.u_shadow_power.value = width < 600 ? 5 : 6;
   }
 
