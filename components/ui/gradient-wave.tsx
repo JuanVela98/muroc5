@@ -635,6 +635,18 @@ void main() {
     window.addEventListener("pointerleave", this.pointerLeaveHandler);
   }
 
+  /** Aplica la deformación del mesh asignando al `.value` de cada sub-uniform. */
+  setDeform(deform: { incline?: number; noiseAmp?: number; noiseFlow?: number }) {
+    const uVertDeform = this.mesh.material.uniforms.u_vertDeform
+      .value as unknown as Record<keyof Deform, Uniform>;
+    if (deform.incline !== undefined) {
+      uVertDeform.incline.value = deform.incline;
+      this.baseIncline = deform.incline;
+    }
+    if (deform.noiseAmp !== undefined) uVertDeform.noiseAmp.value = deform.noiseAmp;
+    if (deform.noiseFlow !== undefined) uVertDeform.noiseFlow.value = deform.noiseFlow;
+  }
+
   resize() {
     const width = window.innerWidth;
     const height = window.innerHeight;
@@ -727,7 +739,7 @@ export function GradientWave({
       >;
       uGlobal.noiseFreq.value = noiseFrequency;
       uGlobal.noiseSpeed.value = noiseSpeed;
-      Object.assign(gradient.mesh.material.uniforms.u_vertDeform.value, deform);
+      gradient.setDeform(deform);
       gradient.interactive = interactive;
 
       // Pausar la animación si el usuario prefiere menos movimiento
