@@ -3,8 +3,8 @@
 /* El fondo visual es el mesh gradient interactivo (components/ui/gradient-wave).
    Estos valores solo sirven de fallback (p. ej. si WebGL no está disponible). */
 :root {
-  --background: #0b1026;
-  --foreground: #f1f5f9;
+  --background: #bae6fd;
+  --foreground: #0f172a;
 }
 
 @theme inline {
